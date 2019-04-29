@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+<main role="main">
+        <div class="jumbotron">
+          <div class="col-sm-8 mx-auto">
+          {% if session['user'] %}
+              <h1>Dear {{ session['user'] }}, Please Enjoy Note Site</h1>
+              {% else %}
+              <h1>Welcome to Note Site</h1>
+          {% endif %}
+
+            <p>You can keep your note here and visit it everywhere</p>
+            <p>It's totally <strong>Free!</strong></p>
+            <p>
+                {% if not session['user'] %}
+
+                <a class="btn btn-primary" href="/login" role="button">Login</a>
+                or
+                <a class="btn btn-danger" href="/register" role="button">Register</a>
+
+      {% else %}
+                    <a class="btn btn-primary" href="/notes" role="button">Notes</a>
+
+    {% endif %}
+            </p>
+          </div>
+        </div>
+      </main>
+</div>
+
+{% endblock content %}
