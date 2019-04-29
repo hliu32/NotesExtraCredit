@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script>
+var result = {"data":[
+  {"name":"Rebecca", "age":20, "car":"Fit"},
+  {"name":"John", "age":35, "car":"Corvette"}
+]};
+
+data = result["data"];
+
+
+if (data.length > 0) {
+
+  output = '<table style="border: 1px solid #ddd; padding: 8px;">';
+
+  output += "<tr>";
+  for (name in data[0]) {
+    output += "<th>" + name + "</th>";
+  }
+  output += "</tr>"
+
+  for (i in data) {
+    output += "<tr>"
+    obj = data[i]
+    for (name in obj) {
+      output += "<td>" + obj[name] + "</td>";
+    }
+    output += "</tr>"
+  }
+
+}
+
+output += "</table>"
+
+$("#content").html(output);
+</script>
+
+</body>
+</html>

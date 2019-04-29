@@ -1,4 +1,5 @@
 # NotesExtraCredit
+Notes app for web class
 
 1. based on python3
 
