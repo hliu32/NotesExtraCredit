@@ -1,8 +1,5 @@
 {% extends "base.html" %}
-{% block style %}
 
-{% endblock style %}
-<link href="/static/css/login.css" rel="stylesheet">
 
 {% block content %}
 <div class="container">
@@ -11,10 +8,17 @@
         <h2 class="form-signin-heading">Please login</h2>
         <input type="text" class="form-control" name="user" id="user_text" placeholder="Username" required="" autofocus="" />
         <input type="password" class="form-control" name="password" id="password_text" placeholder="Password" required=""/>
+        <label class="checkbox pull-left">
+            <input type="checkbox" value="remember-me" name="remember" id="remember_me">
+                    Remember me
+        </label>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
         <br>
-        <a href="/register">Need an account?</a>
+
+
+        <a href="/register" class="btn btn-primary">Need an account?</a>
+        <a href="/forget" class="btn btn-danger">Forget your password?</a>
     </form>
 </div>
 

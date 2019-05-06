@@ -17,9 +17,25 @@ session_table = notes_db.table("session")
 
 
 def add_profile(profile):
-    assert type(profile) is dict
-    assert 'user' in profile
-    assert type(profile['user']) is str
+    if not isinstance(profile, dict):
+        raise TypeError
+    base_profile = {
+        'user': None,
+        'password': None,
+        'salt': None,
+        'secret_answer_1': '',  # what's your favorite color?
+        'secret_answer_2': '',  # what's your favorite food?
+        'secret_answer_3': '',  # what's your favorite movie?
+        'address': '',
+        'email': None
+    }
+    base_profile.update(profile)
+    for k, v in base_profile.items():
+        if not isinstance(v, str):
+            raise TypeError('user profile not invalid')
+    old = get_profile(base_profile['user'])  # username must be unique
+    if old:
+        raise ValueError('{} exits'.format(base_profile['user']))
     profile_table.insert(profile)
 
 
@@ -38,6 +54,14 @@ def get_profile_to_update(user):
 
 
 def delete_profile(user):
+    profile = get_profile_to_update(user)
+    if not profile:
+        raise ValueError('{} do not exist'.format(user))
+    user_notes = get_user_notes(username=user)
+    try:
+        note_table.remove(doc_ids=[d.doc_id for d in user_notes])
+    except KeyError:
+        pass
     profile_table.remove(where('user') == user)
 
 

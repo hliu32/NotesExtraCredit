@@ -28,7 +28,7 @@
 <body>
 
     {% block nav %}{% endblock nav %}
-
+    <div class="container">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
@@ -38,6 +38,7 @@
         </ul>
         {% endif %}
     {% endwith %}
+    </div>
 {% block content %}{% endblock content %}
 {% block footer %}{% endblock footer %}
 

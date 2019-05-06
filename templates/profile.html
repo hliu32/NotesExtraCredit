@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <style>
+    .answer{
+        text-decoration: underline;
+        color: #1e7e34;
+    }
+    </style>
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+<div id="user-profile">
+    <h1>User Profile</h1>
+    <hr>
+    <p>UserName: <span class="answer">{{ profile['user'] }}</span></p>
+    <p>Email: <span class="answer">{{ profile['email'] }}</span></p>
+    <h4>Secret Questions</h4>
+    <h5>The follow questions must be answered and verified to reset password, when your forget your password</h5>
+    <p>Question 1, <strong>what's your favorite color?</strong></p>
+    {% if profile['secret_answer_1'] %}
+        <p>Your Answer: <span class="answer">{{ profile['secret_answer_1'] }}</span></p>
+    {% else %}
+        <p>Not Set, Please answer this question.</p>
+    {% endif %}
+    <p>Question 2, <strong>what's your favorite food?</strong></p>
+    {% if profile['secret_answer_2'] %}
+        <p>Your Answer: <span class="answer">{{ profile['secret_answer_2'] }}</span></p>
+    {% else %}
+        <p>Not Set, Please answer this question.</p>
+    {% endif %}
+    <p>Question 3, <strong>what's your favorite movie?</strong></p>
+    {% if profile['secret_answer_3'] %}
+        <p>Your Answer: <span class="answer">{{ profile['secret_answer_3'] }}</span></p>
+    {% else %}
+        <p>Not Set, Please answer this question.</p>
+    {% endif %}
+    <hr>
+</div>
+<div id="profile-edit">
+<h1>Edit Profile of {{ profile['user'] }}</h1>
+    <hr>
+    <form action="" method="post" role="form">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ profile['email'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="question01">Question 1</label>
+            <p class="help-block">what's your favorite color?</p>
+            <input type="text" id="question01" name="question01" value="{{ profile['secret_answer_1'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="question02">Question 1</label>
+            <p class="help-block">what's your favorite food?</p>
+            <input type="text" id="question02" name="question02" value="{{ profile['secret_answer_2'] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="question03">Question 1</label>
+            <p class="help-block">what's your favorite movie?</p>
+            <input type="text" id="question03" name="question03" value="{{ profile['secret_answer_3'] }}" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="cancelEdit()">Cancel</button>
+    </form>
+</div>
+
+<div id="btn-area">
+<button class="btn btn-primary" id="edit-btn" onclick="editProfile()">Edit Profile</button>
+    <hr>
+<button class="btn btn-danger" id="del-btn" data-toggle="modal" data-target="#myModal">Delete Profile</button>
+<p><strong>Your profile and all your notes will be deleted, Please be caution.</strong></p>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">
+					You Are Going To Delete Your Profile
+				</h4>
+			</div>
+			<div class="modal-body">
+                Your profile will be deleted from our system, as well as all your notes! Please be Caution!
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary"
+						data-dismiss="modal">Close
+				</button>
+				<a type="button" class="btn btn-danger" href="/profile_del">
+					Confirm
+				</a>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+    <script>
+    $(document).ready(function () {
+        $('#profile-edit').hide();
+    });
+    function editProfile() {
+        $("#user-profile").hide();
+        $('#profile-edit').show();
+        $('#btn-area').hide();
+    }
+    function cancelEdit() {
+        $("#user-profile").show();
+        $('#profile-edit').hide();
+        $('#btn-area').show();
+    }
+
+    function deleteProfile() {
+        alert()
+    }
+    </script>
+
+{% endblock script %}
